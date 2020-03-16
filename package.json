@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "description": "A ready-to-use Winston-Logger configuration",
-  "author": "Leandro Di Lorenzo <l.dilorenzo@gmail.com>",
+  "author": "Leandro Di Lorenzo <leandro.jdl@gmail.com>",
   "license": "ISC",
   "repository": {
     "type": "git",
