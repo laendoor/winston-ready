@@ -1,0 +1,33 @@
+{
+  "name": "winston-ready",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "A ready-to-use Winston-Logger configuration",
+  "author": "Leandro Di Lorenzo <l.dilorenzo@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leandrojdl/winston-ready"
+  },
+  "scripts": {
+    "lint": "eslint *.js test/**/*.js",
+    "show-me": "node show-me.js",
+    "test": "jest --verbose"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.1.0",
+    "jest-extended": "^0.11.5"
+  },
+  "keywords": [
+    "logger",
+    "winston"
+  ]
+}

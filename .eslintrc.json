@@ -1,0 +1,12 @@
+{
+  "plugins": ["jest"],
+  "extends": ["airbnb-base", "plugin:jest/recommended"],
+  "rules": {
+    "jest/valid-expect": "error",
+    "no-multi-spaces": ["error", { "ignoreEOLComments": true, "exceptions": { "VariableDeclarator": true } }]
+  },
+  "env": {
+    "node": true,
+    "jest/globals": true
+  }
+}
