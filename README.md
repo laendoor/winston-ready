@@ -33,7 +33,7 @@ logger.error("Show me the money!");
 
 ## Configuration
 
-This package is configured using (optional) environments variables:
+This package is configured using (optional) environment variables:
 
 * `LOG_LEVEL` (default _info_)
 * `LOG_PATH` (default _logs/_)
