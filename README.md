@@ -15,7 +15,7 @@ This is a ready-to-use [Winston logger](https://github.com/winstonjs/winston) wi
 
 All definitions and transports configurations were chosen for personal taste, nothing else.
 
-If you are not agree with them is preferable tha you use `winston` and make your own definitions.
+If you are not agree with them is preferable that you use `winston` and make your own configuration.
 
 ## Installation
 
