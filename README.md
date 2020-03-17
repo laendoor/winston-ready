@@ -26,7 +26,7 @@ npm install winston-ready
 ## Usage
 
 ```js
-const logger = require('logger');
+const logger = require('winston-ready');
 
 logger.error("Show me the money!");
 ```
