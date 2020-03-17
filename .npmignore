@@ -1,0 +1,10 @@
+.*
+*.log
+*.md
+!LICENSE.md
+test
+test/*
+node_modules/
+node_modules/*
+coverage/
+coverage/*
