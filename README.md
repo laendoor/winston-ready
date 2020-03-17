@@ -1,21 +1,21 @@
+# Winston Ready
+
 [![Build Status](https://travis-ci.org/leandrojdl/winston-ready.svg?branch=master)](https://travis-ci.org/leandrojdl/winston-ready)
 [![Coverage Status](https://coveralls.io/repos/github/leandrojdl/winston-ready/badge.svg?branch=master)](https://coveralls.io/github/leandrojdl/winston-ready?branch=master)
 
-# Winston Ready
+This is a ready-to-use [Winston logger](https://github.com/winstonjs/winston) with the default configuration.
 
-This is a ready-to-use [Winston logger](https://github.com/winstonjs/winston) with default configuration.
-
-> **Motivation**
-> 
+> ## Motivation
+>
 > Sometimes you have a few projects and you want to keep consistency between them.
-> Maybe you are tired of copy & paste the same logger configuration over and over.
-> This is how this project was born, to avoid repeat myself on every node project.
+> Maybe you are tired of copying & pasting the same logger configuration over and over.
+> This project was born to avoid having to repeat this process on every new Node project.
 
 **About this ready-to-use default configurations:**
 
-All definitions and transports configurations were chosen for personal taste, nothing else.
+All definitions and transport configurations were chosen for my personal preference and workflow.
 
-If you are not agree with them is preferable that you use `winston` and make your own configuration.
+If they don't suit you, you should use winston and define your custom configuration.
 
 ## Installation
 
@@ -35,7 +35,7 @@ logger.error("Show me the money!");
 
 This package is configured using (optional) environments variables:
 
-* LOG_LEVEL (default _info_)
-* LOG_PATH (default _logs/_)
-* LOG_NAME (default _my-project_)
-* DEV_LOG_LEVEL (only for Console transport, default _LOG\_LEVEL_ || _debug_)
+* `LOG_LEVEL` (default _info_)
+* `LOG_PATH` (default _logs/_)
+* `LOG_NAME` (default _my-project_)
+* `DEV_LOG_LEVEL` (only for Console transport, default _LOG\_LEVEL_ || _debug_)
