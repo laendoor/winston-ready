@@ -4,19 +4,19 @@ require('dotenv').config({ path: `${__dirname}/../.env.testing` });
 const fs = require('fs');
 const logger = require('../index');
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const name   = logger.defaultMeta.service;
 const folder = logger.transports[0].dirname;
-const files  = fs.readdirSync(folder).filter((file) => file.startsWith(name));
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const files  = logger.transports.map(transport => transport.filename);
 
 function logsJSON(type) {
   const content = fs.readFileSync(`${folder}/${name}_${type}.log`).toString().trim();
   if (!content) return [];
-  return content.split('\n').map((each) => JSON.parse(each));
+  return content.split('\n').map(JSON.parse);
 }
 
-const clearLog = (type) => fs.writeFileSync(`${folder}/${name}_${type}.log`, '', () => {});
+const clearLog = type => fs.writeFileSync(`${folder}/${name}_${type}.log`, '', () => {});
 
 describe('Logging Tests', () => {
   beforeEach(() => {
