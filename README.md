@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/leandrojdl/winston-ready.svg?branch=master)](https://travis-ci.org/leandrojdl/winston-ready)
+[![Coverage Status](https://coveralls.io/repos/github/leandrojdl/winston-ready/badge.svg?branch=master)](https://coveralls.io/github/leandrojdl/winston-ready?branch=master)
+
 # Winston Ready
 
 This is a ready-to-use [Winston logger](https://github.com/winstonjs/winston) with default configuration.
