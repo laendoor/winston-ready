@@ -2,7 +2,9 @@
   "plugins": ["jest"],
   "extends": ["airbnb-base", "plugin:jest/recommended"],
   "rules": {
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "jest/valid-expect": "error",
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "no-multi-spaces": ["error", { "ignoreEOLComments": true, "exceptions": { "VariableDeclarator": true } }]
   },
   "env": {
