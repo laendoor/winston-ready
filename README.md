@@ -1,7 +1,11 @@
 # Winston Ready
 
 [![Build Status](https://travis-ci.org/leandrojdl/winston-ready.svg?branch=master)](https://travis-ci.org/leandrojdl/winston-ready)
+[![Dependencies](https://img.shields.io/david/leandrojdl/winston-ready.svg)](https://david-dm.org/leandrojdl/winston-ready)
 [![Coverage Status](https://coveralls.io/repos/github/leandrojdl/winston-ready/badge.svg?branch=master)](https://coveralls.io/github/leandrojdl/winston-ready?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e87719fa91b4f8d83340/maintainability)](https://codeclimate.com/github/leandrojdl/winston-ready/maintainability)
+
+[![NPM](https://nodei.co/npm/winston-ready.png)](https://nodei.co/npm/winston-ready/)
 
 This is a ready-to-use [Winston logger](https://github.com/winstonjs/winston) with the default configuration.
 
