@@ -6,9 +6,10 @@ const logger = require('../index');
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const name   = logger.defaultMeta.service;
-const folder = logger.transports[0].dirname;
-const files  = logger.transports.map(transport => transport.filename);
+const name       = logger.defaultMeta.service;
+const transports = logger.transports.filter(t => t.name !== 'console')
+const folder     = transports[0].dirname;
+const files      = transports.map(transport => transport.filename);
 
 function logsJSON(type) {
   const content = fs.readFileSync(`${folder}/${name}_${type}.log`).toString().trim();
@@ -27,7 +28,7 @@ describe('Logging Tests', () => {
   test('Environment Variables', () => {
     expect(logger.level).toBe(process.env.LOG_LEVEL || 'info');
     expect(logger.defaultMeta.service).toBe(process.env.LOG_NAME || 'my-project');
-    logger.transports.forEach((transport) => {
+    transports.forEach((transport) => {
       expect(transport.dirname).toBe(process.env.LOG_PATH || 'logs/');
       expect(transport.filename).toMatch(new RegExp(`${logger.defaultMeta.service}_(all|error).log`));
     });
