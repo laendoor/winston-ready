@@ -7,7 +7,7 @@ const logger = require('../index');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const name       = logger.defaultMeta.service;
-const transports = logger.transports.filter(t => t.name !== 'console')
+const transports = logger.transports.filter(t => t.name !== 'console');
 const folder     = transports[0].dirname;
 const files      = transports.map(transport => transport.filename);
 
