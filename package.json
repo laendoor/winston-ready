@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "eslint *.js test/**/*.js",
     "show-me": "node show-me.js",
+    "release": "dotenv release-it",
     "test": "jest --verbose",
     "test:ci": "jest --verbose --coverage"
   },
@@ -29,6 +30,24 @@
     "jest": "^27.0.6",
     "jest-extended": "^0.11.5",
     "release-it": "^14.10.0"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": [
+        "npm run lint",
+        "npm test"
+      ]
+    },
+    "git": {
+      "commitMessage": ":bookmark: v${version}"
+    },
+    "github": {
+      "release": true,
+      "releaseName": "Release ${version}"
+    },
+    "npm": {
+      "publish": true
+    }
   },
   "jest": {
     "testEnvironment": "node",
