@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/leandrojdl/winston-ready"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "lint": "eslint *.js test/**/*.js",
     "show-me": "node show-me.js",
