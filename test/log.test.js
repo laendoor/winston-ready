@@ -1,56 +1,55 @@
+require('dotenv').config({ path: '.env.test' });
 require('jest-extended');
-require('dotenv').config({ path: `${__dirname}/../.env.testing` });
 
 const fs = require('fs');
 const logger = require('../index');
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const name       = logger.defaultMeta.service;
-const transports = logger.transports.filter(t => t.name !== 'console');
-const folder     = transports[0].dirname;
-const files      = transports.map(transport => transport.filename);
+const today = () => {
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  return date.toISOString().slice(0, 10);
+};
 
-function logsJSON(type) {
-  const content = fs.readFileSync(`${folder}/${name}_${type}.log`).toString().trim();
+const logName = process.env.LOG_NAME;
+const logLevel = process.env.LOG_LEVEL;
+const folder = process.env.LOG_PATH;
+const files = logger.transports
+  .map(transport => transport.filename)
+  .map(filename => filename.replace('%DATE%', today()));
+
+const logFrom = (type) => {
+  const content = fs.readFileSync(`${folder}/${logName}_${type}.log`).toString().trim();
   if (!content) return [];
   return content.split('\n').map(JSON.parse);
-}
+};
 
-const clearLog = type => fs.writeFileSync(`${folder}/${name}_${type}.log`, '', () => {});
+const clearLogs = () => files
+  .forEach(file => fs.writeFileSync(`${folder}/${file}`, '', () => {}));
 
-describe('Logging Tests', () => {
-  beforeEach(() => {
-    clearLog('all');
-    clearLog('error');
-  });
+describe('Logging Test.skips', () => {
+  beforeEach(() => clearLogs());
 
-  test('Environment Variables', () => {
-    expect(logger.level).toBe(process.env.LOG_LEVEL || 'info');
-    expect(logger.defaultMeta.service).toBe(process.env.LOG_NAME || 'my-project');
-    transports.forEach((transport) => {
-      expect(transport.dirname).toBe(process.env.LOG_PATH || 'logs/');
-      expect(transport.filename).toMatch(new RegExp(`${logger.defaultMeta.service}_(all|error).log`));
+  test('Logger Configuration', () => {
+    expect(logger.level).toBe(logLevel);
+    expect(logger.defaultMeta.service).toBe(logName);
+    logger.transports.forEach((transport) => {
+      const fileRegex = new RegExp(`${logName}_(${logLevel}|error|%DATE%).log`);
+      expect(transport.dirname).toBe(folder);
+      expect(transport.filename).toMatch(fileRegex);
     });
   });
 
-  test('Logs are empty on init', () => {
-    expect(files.length).toBe(2);
-    expect(files).toContain(`${name}_all.log`);
-    expect(files).toContain(`${name}_error.log`);
-    expect(logsJSON('all')).toBeEmpty();
-    expect(logsJSON('error')).toBeEmpty();
-  });
-
   test('Log Errors', async () => {
-    expect(logsJSON('error')).toBeEmpty();
+    expect(logFrom('error')).toBeEmpty();
     logger.info('This is not written as an error');
     await sleep(500);
-    expect(logsJSON('error')).toBeEmpty();
+    expect(logFrom('error')).toBeEmpty();
 
     logger.error('This is an error log');
     await sleep(500);
-    const errorLog = logsJSON('error');
+    const errorLog = logFrom('error');
     expect(errorLog.length).toBe(1);
     const { timestamp, ...item }  = errorLog[0];
     expect(item).toEqual({
@@ -60,21 +59,49 @@ describe('Logging Tests', () => {
     });
   });
 
-  test('Log All', async () => {
-    expect(logsJSON('all')).toBeEmpty();
-    expect(logsJSON('error')).toBeEmpty();
-    logger.debug('This is a debug log');
-    await sleep(500);
-    expect(logsJSON('all')).not.toBeEmpty();
-    expect(logsJSON('error')).toBeEmpty();
+  test('Log Level', async () => {
+    expect(logFrom('error')).toBeEmpty();
+    expect(logFrom(logLevel)).toBeEmpty();
+    expect(logFrom(today())).toBeEmpty();
 
-    const log = logsJSON('all');
-    expect(log.length).toBe(1);
-    const { timestamp, ...item }  = log[0];
+    logger.log(logLevel, 'This is a level log');
+    await sleep(500);
+
+    expect(logFrom('error')).toBeEmpty();
+    expect(logFrom(logLevel)).not.toBeEmpty();
+    expect(logFrom(today())).not.toBeEmpty();
+    expect(logFrom(logLevel)).toEqual(logFrom(today()));
+
+    const currentLog = logFrom(logLevel);
+    expect(currentLog.length).toBe(1);
+    const { timestamp, ...item }  = currentLog[0];
     expect(item).toEqual({
-      message: 'This is a debug log',
+      level: logLevel,
+      message: 'This is a level log',
+    });
+  });
+
+  test('Log Daily', async () => {
+    expect(logFrom(logLevel)).toBeEmpty();
+    expect(logFrom('error')).toBeEmpty();
+    expect(logFrom(today())).toBeEmpty();
+
+    logger.error('This is a daily log');
+    await sleep(500);
+
+    expect(logFrom(logLevel)).not.toBeEmpty();
+    expect(logFrom('error')).not.toBeEmpty();
+    expect(logFrom(today())).not.toBeEmpty();
+    expect(logFrom(today())).toEqual(logFrom(logLevel));
+    expect(logFrom(today())).toEqual(logFrom('error'));
+
+    const currentLog = logFrom(today());
+    expect(currentLog.length).toBe(1);
+    const { timestamp, ...item }  = currentLog[0];
+    expect(item).toEqual({
+      level: 'error',
       service: 'testing',
-      level: 'debug',
+      message: 'This is a daily log',
     });
   });
 });
