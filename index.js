@@ -1,3 +1,3 @@
-const loggerContainer = require('./container');
+const { container } = require('./container');
 
-module.exports = loggerContainer.get('default');
+module.exports = container.get('default');

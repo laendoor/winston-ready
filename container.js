@@ -82,4 +82,8 @@ container.add('default', {
   exitOnError: false,
 });
 
-module.exports = container;
+module.exports = {
+  container,
+  transports,
+  winston,
+};
