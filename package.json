@@ -13,8 +13,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "lint": "eslint *.js test/**/*.js",
-    "show-me": "node show-me.js",
+    "lint": "eslint --ext .js ./",
     "release": "dotenv release-it",
     "test": "jest --verbose",
     "test:ci": "jest --verbose --coverage"
@@ -38,8 +37,7 @@
   "release-it": {
     "hooks": {
       "before:init": [
-        "npm run lint",
-        "npm test"
+        "npm run lint"
       ]
     },
     "git": {
