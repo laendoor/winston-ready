@@ -9,24 +9,47 @@
     "type": "git",
     "url": "https://github.com/leandrojdl/winston-ready"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "lint": "eslint *.js test/**/*.js",
-    "show-me": "node show-me.js",
+    "lint": "eslint --ext .js ./",
+    "release": "dotenv release-it",
     "test": "jest --verbose",
     "test:ci": "jest --verbose --coverage"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
     "coveralls": "^3.1.1",
-    "eslint": "^7.30.0",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.6",
-    "jest-extended": "^0.11.5"
+    "jest-extended": "^0.11.5",
+    "release-it": "^14.10.0"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": [
+        "npm run lint"
+      ]
+    },
+    "git": {
+      "commitMessage": ":bookmark: v${version}"
+    },
+    "github": {
+      "release": true,
+      "releaseName": "Release ${version}"
+    },
+    "npm": {
+      "publish": true
+    }
   },
   "jest": {
     "testEnvironment": "node",
