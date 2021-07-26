@@ -1,6 +1,6 @@
 {
   "name": "winston-ready",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "main": "index.js",
   "description": "A ready-to-use Winston-Logger configuration",
   "author": "Leandro Di Lorenzo <leandro.jdl@gmail.com>",
