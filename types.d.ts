@@ -1,6 +1,6 @@
-import { Container } from "winston";
+import { Container, Logger } from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
-import { ConsoleTransportInstance, FileTransportInstance, Transports } from "winston/lib/winston/transports";
+import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/winston/transports";
 
 /**
  * Transport for Logging based con level definition
@@ -24,5 +24,7 @@ declare function consoleTransport(): ConsoleTransportInstance;
 
 declare const container: Container;
 
-declare const transports: Transports[];
+declare const transports: winston.transports.Transport[];
+
+declare const logger: Logger;
 

@@ -1,3 +1,6 @@
 const { container } = require('./container');
 
-module.exports = container.get('default');
+/** @constant {Logger} */
+const logger = container.get('default');
+
+module.exports = logger;
