@@ -14,16 +14,28 @@ const LOG_CONSOLE_LEVEL = process.env.LOG_CONSOLE_LEVEL || 'debug';
 
 // ***** Transports *****
 
+/**
+ * Transport for Logging based con level definition
+ * @returns {winston.transports.FileTransportInstance}
+ */
 const logTransport = () => new winston.transports.File({
   level: LOG_LEVEL,
   filename: `${LOG_PATH}/${LOG_NAME}_${LOG_LEVEL}.log`,
 });
 
+/**
+ * Transport for Logging error only
+ * @returns {winston.transports.FileTransportInstance}
+ */
 const errorTransport = () => new winston.transports.File({
   level: 'error',
   filename: `${LOG_PATH}/${LOG_NAME}_error.log`,
 });
 
+/**
+ * Transport for Logging based con level definition
+ * @returns {DailyRotateFile}
+ */
 const dailyRotateTransport = () => new winston.transports.DailyRotateFile({
   dirname: LOG_PATH,
   filename: `${LOG_NAME}_%DATE%.log`,
@@ -31,6 +43,10 @@ const dailyRotateTransport = () => new winston.transports.DailyRotateFile({
   maxFiles: LOG_DAYS,
 });
 
+/**
+ * Transport for Logging based con level definition
+ * @returns {winston.transports.ConsoleTransportInstance}
+ */
 const consoleTransport = () => new winston.transports.Console({
   level: LOG_CONSOLE_LEVEL,
   handleExceptions: true,
@@ -46,8 +62,14 @@ const consoleTransport = () => new winston.transports.Console({
 
 // ***** Logger Containers *****
 
+/**
+ * @constant {winston.Container}
+ */
 const container = new winston.Container();
 
+/**
+ * @constant {Array<winston.transports.Transport>}
+ */
 const transports = [];
 
 if (LOG_STYLE === 'single' || LOG_STYLE === 'both') {

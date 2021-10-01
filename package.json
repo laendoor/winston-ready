@@ -2,6 +2,7 @@
   "name": "winston-ready",
   "version": "3.0.2",
   "main": "index.js",
+  "types": "types.d.ts",
   "description": "A ready-to-use Winston-Logger configuration",
   "author": "Leandro Di Lorenzo <leandro.jdl@gmail.com>",
   "license": "ISC",
@@ -15,6 +16,7 @@
   "scripts": {
     "lint": "eslint --ext .js ./",
     "release": "dotenv release-it",
+    "jsdoc": "jsdoc -t node_modules/tsd-jsdoc/dist container.js index.js -d .",
     "test": "jest --verbose",
     "test:ci": "jest --verbose --coverage"
   },
