@@ -1,9 +1,12 @@
 require('dotenv').config({ path: '.env.test' });
-require('jest-extended');
+const matchers = require('jest-extended');
 
 const fs = require('fs');
 const logger = require('../index');
 
+expect.extend(matchers);
+
+// eslint-disable-next-line no-promise-executor-return
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const today = () => {
@@ -78,6 +81,7 @@ describe('Logging Test.skips', () => {
     expect(item).toEqual({
       level: logLevel,
       message: 'This is a level log',
+      service: 'testing',
     });
   });
 
