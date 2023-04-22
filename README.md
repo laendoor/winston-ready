@@ -1,8 +1,7 @@
 # Winston Ready
 
-[![Build Status](https://travis-ci.org/leandrojdl/winston-ready.svg?branch=main)](https://travis-ci.org/leandrojdl/winston-ready)
-[![Dependencies](https://img.shields.io/david/leandrojdl/winston-ready.svg)](https://david-dm.org/leandrojdl/winston-ready)
-[![Coverage Status](https://coveralls.io/repos/github/leandrojdl/winston-ready/badge.svg?branch=main)](https://coveralls.io/github/leandrojdl/winston-ready?branch=main)
+[![Build](https://github.com/laendoor/winston-ready/actions/workflows/testing.yml/badge.svg)](https://github.com/laendoor/winston-ready)
+[![Coverage Status](https://coveralls.io/repos/github/laendoor/winston-ready/badge.svg)](https://coveralls.io/github/laendoor/winston-ready)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e87719fa91b4f8d83340/maintainability)](https://codeclimate.com/github/leandrojdl/winston-ready/maintainability)
 
 [![NPM](https://nodei.co/npm/winston-ready.png)](https://nodei.co/npm/winston-ready/)
